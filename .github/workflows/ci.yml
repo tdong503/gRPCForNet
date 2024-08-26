@@ -1,0 +1,26 @@
+name: test env
+
+on:
+  workflow_dispatch:
+    inputs: 
+      test_env:
+        description: "test"
+        required: true
+        default: 'Dev'
+        type: environment
+        
+env:
+  Dev: "22222"
+  Staging: "3333"
+  Prod: "444"
+  
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Print
+        run: |
+          echo 'Selected: ${{ inputs.test_env }}'
